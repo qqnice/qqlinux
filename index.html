@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -10,7 +12,6 @@
   <h2>網頁檔 (Pages)</h2>
   <ul>
     {% for page in site.pages %}
-      <!-- 排除 index.html 自己，避免重複顯示 -->
       {% if page.name != 'index.html' %}
         <li><a href="{{ site.baseurl }}{{ page.url }}">{{ page.name }}</a></li>
       {% endif %}
