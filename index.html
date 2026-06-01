@@ -1,7 +1,27 @@
-<ul>
-  {% for file in site.static_files %}
-    {% if file.extname == '.html' %}
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>檔案目錄</title>
+</head>
+<body>
+  <h1>📂 檔案目錄</h1>
+  
+  <h2>網頁檔 (Pages)</h2>
+  <ul>
+    {% for page in site.pages %}
+      <!-- 排除 index.html 自己，避免重複顯示 -->
+      {% if page.name != 'index.html' %}
+        <li><a href="{{ site.baseurl }}{{ page.url }}">{{ page.name }}</a></li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+
+  <h2>其他靜態檔案 (Static Files)</h2>
+  <ul>
+    {% for file in site.static_files %}
       <li><a href="{{ site.baseurl }}{{ file.path }}">{{ file.name }}</a></li>
-    {% endif %}
-  {% endfor %}
-</ul>
+    {% endfor %}
+  </ul>
+</body>
+</html>
