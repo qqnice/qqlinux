@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>探索 Google AI Quests - 培養未來的 AI 素養</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            900: '#0c4a6e',
+                        },
+                        secondary: '#4f46e5',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+        
+        .hero-pattern {
+            background-color: #f8fafc;
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+
+    <nav class="fixed w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-100 shadow-sm transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500 to-secondary flex items-center justify-center text-white font-bold text-xl">
+                        AI
+                    </div>
+                    <span class="font-bold text-xl tracking-tight text-gray-900">Quests TW</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#about" class="text-gray-600 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">關於計畫</a>
+                    <a href="#features" class="text-gray-600 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">核心理念</a>
+                    <a href="#teaching" class="text-gray-600 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">教學應用</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="https://research.google/ai-quests/" target="_blank" rel="noopener noreferrer" class="hidden md:inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-full text-white bg-primary-600 hover:bg-primary-700 shadow-sm transition-all hover:shadow-md">
+                        前往遊戲
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative pt-24 pb-20 lg:pt-32 lg:pb-28 overflow-hidden hero-pattern">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="animate-on-scroll fade-in-up">
+                <span class="inline-block py-1 px-3 rounded-full bg-primary-100 text-primary-600 text-sm font-semibold mb-6 border border-primary-200">
+                    Google Research x 史丹佛大學學習加速器
+                </span>
+                <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl mb-6">
+                    <span class="block">化身 AI 研究員</span>
+                    <span class="block text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary pb-2">培養新世代 AI 素養</span>
+                </h1>
+                <p class="mt-3 max-w-2xl mx-auto text-base text-gray-500 sm:text-lg md:text-xl">
+                    專為 11-14 歲學生設計的免寫程式遊戲化學習平台。透過解決真實世界的問題，體驗從數據收集到模型部署的完整 AI 生命週期。
+                </p>
+                <div class="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center gap-4">
+                    <a href="https://research.google/ai-quests/" target="_blank" rel="noopener noreferrer" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-primary-600 hover:bg-primary-700 md:py-4 md:text-lg md:px-10 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 sm:w-auto">
+                        <i class="fa-solid fa-gamepad mr-2"></i> 立即體驗遊戲
+                    </a>
+                    <a href="https://docs.google.com/document/d/16XJQwwYKqjHxik86OtlD2iHkZ0lepojQy7eeeRej078/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="mt-3 w-full flex items-center justify-center px-8 py-3 border border-gray-300 text-base font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10 transition-all shadow-sm hover:shadow-md sm:mt-0 sm:w-auto">
+                        <i class="fa-solid fa-book-open mr-2"></i> 教師中文手冊
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 背景裝飾圖形 -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-primary-100 opacity-50 blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-indigo-100 opacity-50 blur-3xl"></div>
+    </header>
+
+    <section id="about" class="py-16 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+                <div class="animate-on-scroll fade-in-up">
+                    <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl mb-6">
+                        什麼是 AI Quests？
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        多數學生對 AI 的理解僅停留在「對話式」或「生成式」工具。AI Quests 突破這個框架，帶領學生深入幕後。
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        這套工具將抽象的機器學習概念，轉化為具體的互動任務。學生將扮演虛擬研究員，不需編寫任何程式碼，就能親自體驗收集訓練數據、微調模型、測試準確度，並認知到人類在 AI 決策中的關鍵角色。
+                    </p>
+                    <ul class="space-y-4 text-gray-600">
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mt-1">
+                                <i class="fa-solid fa-check text-green-600 text-sm"></i>
+                            </div>
+                            <span class="ml-3">適合對象：11 到 14 歲（國小高年級至國中）</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mt-1">
+                                <i class="fa-solid fa-check text-green-600 text-sm"></i>
+                            </div>
+                            <span class="ml-3">開發團隊：Google Research x 史丹佛大學</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mt-1">
+                                <i class="fa-solid fa-check text-green-600 text-sm"></i>
+                            </div>
+                            <span class="ml-3">學習門檻：免寫程式 (Code-free)、瀏覽器即可運行</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="mt-12 lg:mt-0 relative animate-on-scroll fade-in-up" style="transition-delay: 0.2s;">
+                    <div class="aspect-w-16 aspect-h-9 rounded-2xl overflow-hidden shadow-2xl relative border-4 border-white bg-gray-100 flex items-center justify-center h-80">
+                         <!-- 使用 Placeholder 圖片模擬遊戲畫面，實務上可替換為實際截圖 -->
+                        <div class="text-center p-6">
+                             <i class="fa-solid fa-laptop-code text-6xl text-primary-300 mb-4 block"></i>
+                             <p class="text-gray-500 font-medium">互動式解謎學習環境</p>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900/40 to-transparent"></div>
+                    </div>
+                    
+                    <!-- 裝飾元素 -->
+                    <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-dots-pattern text-gray-200"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll fade-in-up">
+                <h2 class="text-base text-primary-600 font-semibold tracking-wide uppercase">核心目的</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    不只會用 AI，更要懂 AI
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 特色 1 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 card-hover transition-all duration-300 animate-on-scroll fade-in-up" style="transition-delay: 0.1s;">
+                    <div class="w-14 h-14 rounded-xl bg-blue-100 flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-diagram-project text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">建立完整 AI 認知</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        跳脫單純的指令輸入。體驗從定義問題、收集資料、訓練模型到測試部署的完整開發週期，了解 AI 系統是如何被建構出來的。
+                    </p>
+                </div>
+
+                <!-- 特色 2 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 card-hover transition-all duration-300 animate-on-scroll fade-in-up" style="transition-delay: 0.2s;">
+                    <div class="w-14 h-14 rounded-xl bg-purple-100 flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-scale-balanced text-2xl text-purple-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">著重科技倫理與決策</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        在訓練過程中考量數據多樣性與隱私保護。學習辨識偏見（例如：醫療數據是否涵蓋不同族群），並體認到人類需為最終決策負責。
+                    </p>
+                </div>
+
+                <!-- 特色 3 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 card-hover transition-all duration-300 animate-on-scroll fade-in-up" style="transition-delay: 0.3s;">
+                    <div class="w-14 h-14 rounded-xl bg-green-100 flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-earth-americas text-2xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">解決真實世界問題</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        挑戰錨定於氣候變遷（如洪水預測）、公共衛生等真實議題。激發學生使命感，認知科技能創造正面社會價值。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="teaching" class="py-20 bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll fade-in-up">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    如何引導小學生使用？
+                </h2>
+                <p class="mt-4 text-xl text-gray-500">結合專題式學習 (PjBL)，將抽象概念化為具體歷程</p>
+            </div>
+
+            <div class="relative">
+                <!-- 時間軸垂直線 (僅在大螢幕顯示) -->
+                <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gray-200"></div>
+
+                <div class="space-y-12 relative">
+                    <!-- 步驟 1 -->
+                    <div class="md:flex items-center justify-between animate-on-scroll fade-in-up">
+                        <div class="md:w-5/12 mb-6 md:mb-0 text-right pr-0 md:pr-8">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">1. 情境導入</h3>
+                            <p class="text-primary-600 font-medium mb-3">以故事驅動問題探索</p>
+                            <p class="text-gray-600">利用遊戲故事情境（如醫療資源短缺）進行導入。教師可先探討議題背景，讓學生帶著「解決挑戰」的使命感進入遊戲，而非單純闖關。</p>
+                        </div>
+                        <div class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-10 h-10 rounded-full bg-white border-4 border-primary-500 items-center justify-center z-10 font-bold text-primary-600">1</div>
+                        <div class="md:w-5/12 pl-0 md:pl-8">
+                            <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-sm">
+                                <i class="fa-solid fa-book-journal-whills text-3xl text-gray-400 mb-3"></i>
+                                <p class="text-sm text-gray-500 italic">"我們今天要成為虛擬研究員，幫助偏鄉建立眼科篩檢系統..."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 步驟 2 -->
+                    <div class="md:flex items-center justify-between flex-row-reverse animate-on-scroll fade-in-up">
+                        <div class="md:w-5/12 mb-6 md:mb-0 pl-0 md:pl-8 text-left">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">2. 動手實作</h3>
+                            <p class="text-primary-600 font-medium mb-3">小組共創與決策模擬</p>
+                            <p class="text-gray-600">學生需決策挑選哪些數據教導 AI。教師安排小組討論，辯證選擇特定數據是否導致偏見，並在反饋中觀察影響並修正。</p>
+                        </div>
+                        <div class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-10 h-10 rounded-full bg-white border-4 border-primary-500 items-center justify-center z-10 font-bold text-primary-600">2</div>
+                        <div class="md:w-5/12 pr-0 md:pr-8 text-right">
+                            <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-sm text-left">
+                                <i class="fa-solid fa-users-viewfinder text-3xl text-gray-400 mb-3"></i>
+                                <p class="text-sm text-gray-500 italic">"如果你只用白天拍的照片訓練 AI，它晚上還認得出物件嗎？"</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 步驟 3 -->
+                    <div class="md:flex items-center justify-between animate-on-scroll fade-in-up">
+                        <div class="md:w-5/12 mb-6 md:mb-0 text-right pr-0 md:pr-8">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">3. 課後反思</h3>
+                            <p class="text-primary-600 font-medium mb-3">學習遷移與成效評估</p>
+                            <p class="text-gray-600">完成任務後，引導學生觀看研究員解說影片。透過反思札記或發表，檢視遊戲決策如何對應現實科技倫理，助於質性評估。</p>
+                        </div>
+                        <div class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-10 h-10 rounded-full bg-white border-4 border-primary-500 items-center justify-center z-10 font-bold text-primary-600">3</div>
+                        <div class="md:w-5/12 pl-0 md:pl-8">
+                            <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-sm">
+                                <i class="fa-solid fa-pen-to-square text-3xl text-gray-400 mb-3"></i>
+                                <p class="text-sm text-gray-500 italic">"記錄下你在調整數據時發現了什麼偏見，這在現實中會造成什麼影響？"</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 步驟 4 -->
+                    <div class="md:flex items-center justify-between flex-row-reverse animate-on-scroll fade-in-up">
+                        <div class="md:w-5/12 mb-6 md:mb-0 pl-0 md:pl-8 text-left">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">4. 教學整合</h3>
+                            <p class="text-primary-600 font-medium mb-3">運用資源降低門檻</p>
+                            <p class="text-gray-600">平台內建完整教師手冊。即使教師無程式背景，也能將其作為隨插即用模組，融入資訊或綜合活動課程。</p>
+                        </div>
+                        <div class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-10 h-10 rounded-full bg-white border-4 border-primary-500 items-center justify-center z-10 font-bold text-primary-600">4</div>
+                        <div class="md:w-5/12 pr-0 md:pr-8 text-right">
+                            <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-sm text-left">
+                                <i class="fa-solid fa-chalkboard-user text-3xl text-gray-400 mb-3"></i>
+                                <a href="https://docs.google.com/document/d/16XJQwwYKqjHxik86OtlD2iHkZ0lepojQy7eeeRej078/edit?usp=sharing" target="_blank" class="text-sm text-primary-600 font-medium hover:underline inline-flex items-center">
+                                    取得現成教案與中文手冊 <i class="fa-solid fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-gradient-to-br from-gray-900 to-primary-900 py-16 relative overflow-hidden">
+        <!-- 裝飾用背景圈圈 -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-white opacity-5 blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-primary-500 opacity-10 blur-3xl"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 animate-on-scroll fade-in-up">
+            <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-6">
+                準備好帶領學生探索 AI 領域了嗎？
+            </h2>
+            <p class="text-xl text-primary-100 mb-10">
+                結合遊戲化情境與決策反思，將工具無縫導入您的教學單元。
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="https://research.google/ai-quests/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-bold rounded-full text-gray-900 bg-white hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+                    進入 AI Quests
+                </a>
+                <a href="https://docs.google.com/document/d/16XJQwwYKqjHxik86OtlD2iHkZ0lepojQy7eeeRej078/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-8 py-4 border border-white/30 text-lg font-bold rounded-full text-white bg-white/10 hover:bg-white/20 transition-all backdrop-blur-sm">
+                    <i class="fa-solid fa-file-pdf mr-2"></i> 閱讀教師中文手冊
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 py-8 border-t border-gray-800 text-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-gray-400 text-sm">
+                本網站為非官方推廣頁面，旨在協助教育工作者了解並應用 Google AI Quests 於教學中。<br>
+                所有商標與專案版權皆屬 Google Research 及原開發團隊所有。
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 監聽滾動事件，為 Navbar 加上陰影
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 10) {
+                    navbar.classList.add('shadow-md');
+                    navbar.classList.remove('shadow-sm');
+                } else {
+                    navbar.classList.remove('shadow-md');
+                    navbar.classList.add('shadow-sm');
+                }
+            });
+
+            // 觀察者模式：用於滾動出現動畫 (Fade in up)
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // 動畫只播放一次
+                    }
+                });
+            }, observerOptions);
+
+            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+            animatedElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
