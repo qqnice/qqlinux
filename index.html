@@ -1,153 +1,38 @@
 <!DOCTYPE html>
+
 <html lang="zh-TW">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QQ 老師的 Linux 教學分享區</title>
-  <style>
-    :root {
-      --primary-color: #2c3e50;
-      --accent-color: #e95420; /* Ubuntu Orange */
-      --bg-color: #f4f7f6;
-      --text-color: #333;
-    }
-    
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      margin: 0;
-      padding: 0;
-    }
 
-    .container {
-      max-width: 900px;
-      margin: 40px auto;
-      background: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-      overflow: hidden;
-    }
+  <title>QQ Linux 教學 檔案目錄</title>
 
-    header {
-      background-color: var(--primary-color);
-      color: #ffffff;
-      padding: 40px 30px;
-      text-align: center;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 2.2em;
-      letter-spacing: 1px;
-    }
-
-    header p {
-      margin-top: 10px;
-      font-size: 1.1em;
-      opacity: 0.9;
-    }
-
-    .content {
-      padding: 30px 40px;
-    }
-
-    h2 {
-      color: var(--primary-color);
-      border-bottom: 2px solid #eee;
-      padding-bottom: 10px;
-      margin-top: 30px;
-    }
-
-    /* 檔案列表美化 */
-    .file-list {
-      list-style: none;
-      padding: 0;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 15px;
-      margin-top: 20px;
-    }
-
-    .file-list li {
-      background: #fdfdfd;
-      border: 1px solid #eaeaea;
-      border-left: 4px solid var(--accent-color);
-      border-radius: 6px;
-      transition: all 0.3s ease;
-    }
-
-    .file-list li:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 10px rgba(0,0,0,0.08);
-      border-left-color: var(--primary-color);
-    }
-
-    .file-list a {
-      text-decoration: none;
-      color: var(--text-color);
-      font-weight: 500;
-      display: block;
-      padding: 15px 20px;
-    }
-
-    .file-list a::before {
-      content: '📄';
-      margin-right: 10px;
-    }
-
-    /* 關於作者區塊美化 */
-    .author-box {
-      background: #f8f9fa;
-      border-radius: 8px;
-      padding: 20px;
-      margin-top: 40px;
-      border-left: 4px solid #3498db;
-    }
-
-    .author-box h3 {
-      margin-top: 0;
-      color: var(--primary-color);
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9em;
-      color: #777;
-      background: #f1f1f1;
-    }
-  </style>
 </head>
+
 <body>
 
-  <div class="container">
-    <header>
-      <h1>📂 QQ 老師的 Linux 教學分享區</h1>
-      <p>結合 Generative AI 與互動視覺化的系統學習天地</p>
-    </header>
+  <h1>📂 QQ Linux 教學 檔案目錄</h1>
 
-    <div class="content">
-      <h2>📂 課程檔案目錄 (Static Files)</h2>
-      <p>點擊下方列表中的檔案，即可開始您的互動式學習之旅：</p>
-      
-      <ul class="file-list">
-        {% for file in site.static_files %}
-          <li><a href="{{ site.baseurl }}{{ file.path }}">{{ file.name }}</a></li>
-        {% endfor %}
-      </ul>
+  
 
-      <div class="author-box">
-        <h3>👨‍🏫 關於作者：QQ 老師 (Wen-Yen Lin)</h3>
-        <p>現任教於國立臺中科技大學資訊管理學系。具備三十年深厚的密碼技術研發與國家級資訊安全實務經驗，並曾任多國數位機會中心國際講師。近年致力於教學實踐研究 (SoTL)，期望透過這個開源分享區，幫助大家以更輕鬆、更有趣的方式跨入 Linux 與雲端運算的世界！</p>
-      </div>
-    </div>
-    
-    <footer>
-      &copy; 2026 QQ 老師的 Linux 教學分享區. All rights reserved.
-    </footer>
-  </div>
+
+
+
+
+  <h2>Linux 教學檔案 (Static Files)</h2>
+
+  <ul>
+
+    {% for file in site.static_files %}
+
+      <li><a href="{{ site.baseurl }}{{ file.path }}">{{ file.name }}</a></li>
+
+    {% endfor %}
+
+  </ul>
 
 </body>
-</html>
+
+</html> 
+
