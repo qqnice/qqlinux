@@ -64,27 +64,6 @@
       margin-top: 30px;
     }
 
-    /* === 響應式影片區塊樣式 (新增) === */
-    .video-container {
-      position: relative;
-      padding-bottom: 56.25%; /* 設定 16:9 比例 */
-      height: 0;
-      overflow: hidden;
-      margin-bottom: 30px;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-    }
-
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-    /* ================================= */
-
     /* 特色亮點卡片 */
     .features {
       display: grid;
@@ -191,15 +170,12 @@
     </header>
 
     <div class="content">
+      <!-- 歡迎與理念 -->
       <div class="intro-text">
         <p>歡迎來到我的互動式學習天地！本網站的核心理念是將<strong>專題導向學習 (PjBL)</strong> 與最新科技結合。透過 <strong>Generative AI (Google Gemini)</strong> 的強大輔助與 <strong>Canva</strong> 的視覺化互動設計，為學習者帶來更直覺、更生動的技術體驗。所有的教材與靜態網頁皆透過 GitHub Pages 進行開源分享。</p>
       </div>
 
-      <h2>📺 焦點教學影片</h2>
-      <p>點擊播放，快速了解本課程的核心操作與系統架構：</p>
-      <div class="video-container">
-        <iframe width="1133" height="638" src="https://www.youtube.com/embed/lNGMGvk0vu8" title="AI Quests | Bringing AI Literacy to the Classroom" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-      </div>
+      <!-- 網站特色 -->
       <h2>✨ 網站特色與教學亮點</h2>
       <div class="features">
         <div class="feature-card">
@@ -220,6 +196,7 @@
         </div>
       </div>
       
+      <!-- 檔案列表 (加上最上方的 --- 後，這裡就會正常抓取了) -->
       <h2>📂 QQ Linux 教學 檔案目錄</h2>
       <p>下方是目前已上傳至 GitHub 的教學檔案，請直接點擊瀏覽：</p>
       
@@ -229,6 +206,7 @@
         {% endfor %}
       </ul>
 
+      <!-- 關於作者 -->
       <div class="author-box">
         <h3>👨‍🏫 關於作者：QQ 老師 (Wen-Yen Lin)</h3>
         <p>現任教於國立臺中科技大學資訊管理學系。具備三十年深厚的密碼技術研發與國家級資訊安全實務經驗，並曾任多國數位機會中心 (ADOC/TDOC) 國際講師。近年致力於教學實踐研究 (SoTL)，期望透過這個開源分享區，幫助無論是初學者還是進階開發者，都能以更輕鬆、有趣的方式跨入 Linux 與雲端運算的世界！</p>
