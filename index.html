@@ -1,38 +1,17 @@
 <!DOCTYPE html>
-
 <html lang="zh-TW">
-
 <head>
-
   <meta charset="UTF-8">
-
   <title>QQ Linux 教學 檔案目錄</title>
-
 </head>
-
 <body>
-
   <h1>📂 QQ Linux 教學 檔案目錄</h1>
-
-  
-
-
-
-
-
   <h2>Linux 教學檔案 (Static Files)</h2>
-
   <ul>
-
     {% for file in site.static_files %}
-
       <li><a href="{{ site.baseurl }}{{ file.path }}">{{ file.name }}</a></li>
-
     {% endfor %}
-
   </ul>
-
 </body>
-
 </html> 
 
