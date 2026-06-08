@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rsyslog to Graylog 部署與實作指南</title>
+    <title>Rsyslog to Graylog 部署與進階除錯互動指南</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -67,10 +67,10 @@
                     </div>
                     <div>
                         <h1 class="text-2xl font-bold tracking-tight flex items-center gap-2">
-                            Rsyslog <span class="text-xs bg-slate-700 text-slate-300 px-2 py-0.5 rounded-full">v1.1</span>
-                            <span class="text-indigo-400 font-light">to</span> Graylog 集中式日誌部署工具
+                            Rsyslog <span class="text-xs bg-slate-700 text-slate-300 px-2 py-0.5 rounded-full">v1.3</span>
+                            <span class="text-indigo-400 font-light">to</span> Graylog 部署與服務端除錯工具
                         </h1>
-                        <p class="text-xs text-slate-400 mt-1">互動式架構建置指南、環境變數同步引擎與即時沙盒模擬器</p>
+                        <p class="text-xs text-slate-400 mt-1">互動式架構建置指南、環境變數同步引擎、MongoDB & OpenSearch 生態診斷手冊與沙盒模擬器</p>
                     </div>
                 </div>
                 <!-- 狀態燈 -->
@@ -79,7 +79,7 @@
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
                     </span>
-                    <span class="text-xs font-mono text-slate-300">狀態: 引擎核心已修復</span>
+                    <span class="text-xs font-mono text-slate-300">狀態: 生態系統診斷已上線</span>
                 </div>
             </div>
         </div>
@@ -187,7 +187,7 @@
                 </button>
                 <button onclick="switchTab('graylog')" id="tab-btn-graylog" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-lg font-semibold text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all flex items-center justify-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path></svg>
-                    2. Graylog 設定
+                    2. Graylog 設定 & 除錯
                 </button>
                 <button onclick="switchTab('ubuntu')" id="tab-btn-ubuntu" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-lg font-semibold text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all flex items-center justify-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
@@ -281,7 +281,7 @@
                                     <span class="w-1.5 h-4 bg-indigo-500 rounded-full"></span>部署前哨提醒 (Pre-flight Check)
                                 </h4>
                                 <ul class="space-y-2 text-xs text-slate-600 list-disc list-inside">
-                                    <li>確保 Ubuntu 機器可以 Ping 通 Graylog 伺服器：<code class="bg-white px-1.5 py-0.5 rounded border text-xs">ping <span class="dyn-graylog-ip">10.24.1.1</span></code></li>
+                                    <li>確保 Ubuntu 機器可以 Ping 通 Graylog 伺服器：<code class="bg-white px-1.5 py-0.5 rounded border text-xs font-mono">ping <span class="dyn-graylog-ip">10.24.1.1</span></code></li>
                                     <li>Graylog 的 Syslog UDP Input **必須設定在 1024 以上的連接埠**，因為系統不允許非 root 身分程序占用核心特權 Port（如 514）。</li>
                                 </ul>
                             </div>
@@ -290,15 +290,15 @@
                 </div>
             </div>
 
-            <!-- 分頁 2: Graylog 設定 -->
+            <!-- 分頁 2: Graylog 設定 & 除錯 -->
             <div id="tab-graylog" class="tab-content hidden">
                 <div class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
                     <div class="p-6 bg-gradient-to-r from-slate-900 to-indigo-950 text-white">
                         <h2 class="text-xl font-bold flex items-center gap-2">
                             <span class="w-2 h-6 bg-emerald-500 rounded-full inline-block"></span>
-                            Graylog Server 接收端建置
+                            Graylog Server 接收端建置與進階除錯
                         </h2>
-                        <p class="text-sm text-slate-300 mt-2">啟動 Syslog UDP 接收通道，並配置本機 UFW 防火牆規則阻擋未授權連線。</p>
+                        <p class="text-sm text-slate-300 mt-2">啟動 Syslog UDP 接收通道，配置防火牆規則，並提供完整的常見故障排查方案。</p>
                     </div>
 
                     <div class="p-6 space-y-6">
@@ -365,7 +365,7 @@
                                         <div class="flex items-center justify-between gap-4">
                                             <code id="cmd-ufw-secure" class="text-xs text-indigo-300 code-font break-all">sudo ufw allow from <span class="dyn-client-ip">10.24.1.100</span> to any port <span class="dyn-graylog-port">30514</span> proto udp</code>
                                             <button onclick="copyToClipboard('cmd-ufw-secure')" class="flex-shrink-0 bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1.5 rounded text-xs transition-colors flex items-center gap-1">
-                                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
                                                 複製
                                             </button>
                                         </div>
@@ -377,9 +377,162 @@
                                         <div class="flex items-center justify-between gap-4">
                                             <code id="cmd-ufw-any" class="text-xs text-slate-300 code-font break-all">sudo ufw allow <span class="dyn-graylog-port">30514</span>/udp</code>
                                             <button onclick="copyToClipboard('cmd-ufw-any')" class="flex-shrink-0 bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1.5 rounded text-xs transition-colors flex items-center gap-1">
-                                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
                                                 複製
                                             </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 第三步：常見狀況與除錯指南 (Troubleshooting) -->
+                        <div class="flex gap-4">
+                            <div class="flex flex-col items-center">
+                                <div class="w-8 h-8 rounded-full bg-[#f38ba8]/20 border border-[#f38ba8] flex items-center justify-center font-bold text-[#f38ba8] text-sm">!</div>
+                                <div class="w-0.5 flex-1 bg-slate-200 my-2"></div>
+                            </div>
+                            <div class="flex-1 bg-red-50/40 rounded-xl p-5 border border-red-200/60">
+                                <div class="flex justify-between items-center mb-4 pb-2 border-b border-red-100">
+                                    <h3 class="font-bold text-red-950 text-sm flex items-center gap-2">
+                                        <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                        Graylog Server 狀況排查診斷手冊 (Troubleshooting)
+                                    </h3>
+                                    <span class="text-[10px] bg-red-100 text-red-700 px-2 py-0.5 rounded-full font-bold">運維核心</span>
+                                </div>
+                                
+                                <div class="space-y-4 text-xs text-slate-700">
+                                    <!-- 狀況一：連不上 9000 Port (新增) -->
+                                    <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+                                        <h4 class="font-bold text-slate-900 text-sm flex items-center gap-1.5 mb-2 text-rose-700">
+                                            <span class="w-1.5 h-3.5 bg-rose-600 rounded-full"></span>
+                                            新痛點：Graylog Server 9000 Port 怎麼樣都連不上、網頁打不開？
+                                        </h4>
+                                        <p class="text-slate-600 mb-3">
+                                            Graylog 的底層架構強烈依賴 **MongoDB** (儲存設定、Dashboard、Metadata) 與 **OpenSearch / Elasticsearch** (儲存龐大的日誌數據)。
+                                            若這兩大資料庫服務其中一個掛掉、或 Graylog 連不上它們，Graylog Server 就會卡在初始化階段並陷入不斷重啟，此時 **9000 port 當然就不會開啟**。
+                                        </p>
+                                        
+                                        <div class="space-y-3.5">
+                                            <!-- 子步驟 1 -->
+                                            <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
+                                                <span class="block font-bold text-slate-800 mb-1.5">步驟 1：診斷 MongoDB 運作狀態</span>
+                                                <p class="text-[11px] text-slate-500 mb-2">MongoDB 必須優先成功啟動，Graylog 才能讀取它的開機 Metadata。請檢查其系統服務：</p>
+                                                <div class="bg-slate-950 p-2.5 rounded-md flex items-center justify-between gap-4 font-mono">
+                                                    <code id="cmd-dbg-mongo" class="text-[11px] text-rose-300">sudo systemctl status mongod</code>
+                                                    <button onclick="copyToClipboard('cmd-dbg-mongo')" class="flex-shrink-0 bg-slate-800 hover:bg-slate-700 text-slate-300 px-2 py-1 rounded text-[10px] transition-colors">複製</button>
+                                                </div>
+                                                <p class="text-[10px] text-slate-400 mt-1.5">*(備註：部分舊版系統服務名稱可能為 <code class="font-mono text-xs bg-white border px-1">mongodb</code>)*</p>
+                                            </div>
+
+                                            <!-- 子步驟 2 -->
+                                            <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
+                                                <span class="block font-bold text-slate-800 mb-1.5">步驟 2：排查 OpenSearch / Elasticsearch 與 Port 9000 狀況</span>
+                                                <p class="text-[11px] text-slate-500 mb-2">確認 Graylog 的監聽埠狀態，並嘗試重啟日誌儲存引擎：</p>
+                                                
+                                                <div class="space-y-2">
+                                                    <div>
+                                                        <span class="block text-[10px] text-slate-400 font-semibold mb-1">A. 先檢視目前系統開放的所有 Port 狀態：</span>
+                                                        <div class="bg-slate-950 p-2.5 rounded-md flex items-center justify-between gap-4 font-mono">
+                                                            <code id="cmd-dbg-netstat1" class="text-[11px] text-rose-300">sudo netstat -tnpl</code>
+                                                            <button onclick="copyToClipboard('cmd-dbg-netstat1')" class="flex-shrink-0 bg-slate-800 hover:bg-slate-700 text-slate-300 px-2 py-1 rounded text-[10px] transition-colors">複製</button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div>
+                                                        <span class="block text-[10px] text-slate-400 font-semibold mb-1">B. 重啟 OpenSearch / Elasticsearch 服務 (排查其假死)：</span>
+                                                        <div class="bg-slate-950 p-2.5 rounded-md flex items-center justify-between gap-4 font-mono">
+                                                            <code id="cmd-dbg-re-os" class="text-[11px] text-rose-300">sudo systemctl restart opensearch</code>
+                                                            <button onclick="copyToClipboard('cmd-dbg-re-os')" class="flex-shrink-0 bg-slate-800 hover:bg-slate-700 text-slate-300 px-2 py-1 rounded text-[10px] transition-colors">複製</button>
+                                                        </div>
+                                                        <p class="text-[10px] text-slate-400 mt-1">*(若您使用的是 Elasticsearch，請重啟 <code class="font-mono text-xs bg-white border px-1">elasticsearch</code>)*</p>
+                                                    </div>
+
+                                                    <div>
+                                                        <span class="block text-[10px] text-slate-400 font-semibold mb-1">C. 再次驗證 9000 Port 是否被成功拉起：</span>
+                                                        <div class="bg-slate-950 p-2.5 rounded-md flex items-center justify-between gap-4 font-mono">
+                                                            <code id="cmd-dbg-netstat2" class="text-[11px] text-rose-300">sudo netstat -tnpl</code>
+                                                            <button onclick="copyToClipboard('cmd-dbg-netstat2')" class="flex-shrink-0 bg-slate-800 hover:bg-slate-700 text-slate-300 px-2 py-1 rounded text-[10px] transition-colors">複製</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- 狀況二：RUNNING 但沒 LOG -->
+                                    <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+                                        <h4 class="font-bold text-slate-900 text-sm flex items-center gap-1.5 mb-2">
+                                            <span class="w-1.5 h-3.5 bg-rose-500 rounded-full"></span>
+                                            狀況 2：Graylog Input 呈現 RUNNING，但搜尋頁完全沒有任何日誌
+                                        </h4>
+                                        <p class="text-slate-600 mb-3">這通常是**網路連通性**或**防火牆攔截**所致。UDP 是無連接協議，即使目的地防火牆阻擋，發送端 Rsyslog 也不會報錯。請直接在 Graylog Server 執行抓包確認：</p>
+                                        
+                                        <div class="bg-slate-950 p-3 rounded-lg flex items-center justify-between gap-4 font-mono mb-2">
+                                            <code id="cmd-dbg-tcpdump" class="text-[11px] text-rose-300">sudo tcpdump -i any udp port <span class="dyn-graylog-port">30514</span> -nn -vv -X</code>
+                                            <button onclick="copyToClipboard('cmd-dbg-tcpdump')" class="flex-shrink-0 bg-slate-800 hover:bg-slate-700 text-slate-300 px-2 py-1 rounded text-[10px] transition-colors">複製</button>
+                                        </div>
+                                        <ul class="list-disc list-inside space-y-1 text-slate-500 text-[11px] pl-1">
+                                            <li><strong>有抓到封包：</strong>代表封包已抵達，問題出在 Graylog 內部的 Index 寫入或 Stream 過濾器。</li>
+                                            <li><strong>完全無封包：</strong>請檢查 Ubuntu Client 是否能路由到 Graylog，或中間是否有雲端安全性群組 (Security Group) 阻擋該 UDP Port。</li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- 狀況三：Input 啟動 FAILED -->
+                                    <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+                                        <h4 class="font-bold text-slate-900 text-sm flex items-center gap-1.5 mb-2">
+                                            <span class="w-1.5 h-3.5 bg-rose-500 rounded-full"></span>
+                                            狀況 3：新建 Input 狀態呈紅色的 FAILED 且無法啟動
+                                        </h4>
+                                        <p class="text-slate-600 mb-3">此狀況高機率為**Port 被佔用**或**權限不足**：</p>
+                                        <ul class="list-decimal list-inside space-y-2 mb-3 pl-1">
+                                            <li>
+                                                <strong>檢測 Port 是否已被其他程序佔用：</strong>在 Graylog 主機執行以下命令：
+                                                <div class="bg-slate-950 p-2.5 rounded-lg flex items-center justify-between gap-4 font-mono mt-1.5 mb-1.5">
+                                                    <code id="cmd-dbg-ss" class="text-[11px] text-rose-300">sudo ss -tulnp | grep <span class="dyn-graylog-port">30514</span></code>
+                                                    <button onclick="copyToClipboard('cmd-dbg-ss')" class="flex-shrink-0 bg-slate-800 hover:bg-slate-700 text-slate-300 px-2 py-1 rounded text-[10px] transition-colors">複製</button>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <strong>核心權限問題：</strong>若您將 Port 設為標準 Syslog Port <code class="bg-slate-100 px-1 py-0.5 rounded border text-slate-800 font-mono">514</code>，非 root 權限執行的 Graylog 將會啟動失敗。**強烈建議使用 1024 以上的 Port (如 <span class="dyn-graylog-port">30514</span>)**。
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- 狀況四：磁碟滿鎖定唯讀 -->
+                                    <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+                                        <h4 class="font-bold text-slate-900 text-sm flex items-center gap-1.5 mb-2">
+                                            <span class="w-1.5 h-3.5 bg-rose-500 rounded-full"></span>
+                                            狀況 4：出現 Cluster Blocked / Index Read-Only 鎖定錯誤
+                                        </h4>
+                                        <p class="text-slate-600 mb-2">這是最經典的 Graylog 停止接收狀況。當後端的 Elasticsearch/OpenSearch 所在磁碟空間**超過 95% (Watermark Floodstage)**，系統會自動將所有 Index 鎖定為**唯讀 (Read-only)**，導致 Graylog 完全無法寫入新日誌。</p>
+                                        
+                                        <div class="border-l-4 border-amber-500 bg-amber-50 p-3 rounded-r-lg mb-3">
+                                            <p class="text-amber-900 font-bold mb-1">錯誤特徵 (出現在 Graylog Server Log 中)：</p>
+                                            <code class="block text-[10px] font-mono text-amber-800 break-words">"flood stage disk watermark [95%] exceeded on ... all indices on this node will be marked read-only"</code>
+                                        </div>
+                                        
+                                        <div class="space-y-1.5">
+                                            <p class="text-slate-800 font-bold">💡 排除步驟：</p>
+                                            <ol class="list-decimal list-inside space-y-1 text-slate-600 pl-1">
+                                                <li>清理 Graylog 主機磁碟空間，釋放至 90% 以下。</li>
+                                                <li>
+                                                    執行以下 API 指令向 Elasticsearch 發送請求，解鎖唯讀限制：
+                                                    <div class="bg-slate-950 p-2.5 rounded-lg flex items-center justify-between gap-4 font-mono mt-1.5">
+                                                        <code id="cmd-dbg-es" class="text-[11px] text-rose-300">curl -X PUT "http://localhost:9200/_settings" -H 'Content-Type: application/json' -d '{"index.blocks.read_only_allow_delete": null}'</code>
+                                                        <button onclick="copyToClipboard('cmd-dbg-es')" class="flex-shrink-0 bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1.5 rounded text-[10px] transition-colors">複製</button>
+                                                    </div>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 日誌查看指令 -->
+                                    <div class="bg-slate-900 text-slate-300 p-4 rounded-lg font-mono">
+                                        <span class="text-slate-500">// 即時監看 Graylog 系統運作狀況與詳細 Exception 拋出：</span>
+                                        <div class="flex items-center justify-between gap-4 mt-1.5">
+                                            <code id="cmd-dbg-log" class="text-[11px] text-emerald-400">sudo tail -f /var/log/graylog-server/server.log -n 100</code>
+                                            <button onclick="copyToClipboard('cmd-dbg-log')" class="flex-shrink-0 bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1.5 rounded text-[10px] transition-colors">複製</button>
                                         </div>
                                     </div>
                                 </div>
@@ -414,7 +567,7 @@
                                 <div class="bg-slate-950 rounded-lg p-3.5 flex items-center justify-between gap-4">
                                     <code id="cmd-install-rsyslog" class="text-xs text-slate-300 code-font break-all">sudo apt update && sudo apt install rsyslog -y && sudo systemctl enable --now rsyslog</code>
                                     <button onclick="copyToClipboard('cmd-install-rsyslog')" class="flex-shrink-0 bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1.5 rounded text-xs transition-colors flex items-center gap-1">
-                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
                                         複製
                                     </button>
                                 </div>
@@ -438,7 +591,7 @@
                                     <div class="bg-slate-950 rounded-lg p-3.5 flex items-center justify-between gap-4">
                                         <code id="cmd-edit-conf" class="text-xs text-slate-300 code-font break-all">sudo nano /etc/rsyslog.d/<span class="dyn-config-file">99-graylog.conf</span></code>
                                         <button onclick="copyToClipboard('cmd-edit-conf')" class="flex-shrink-0 bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1.5 rounded text-xs transition-colors flex items-center gap-1">
-                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
                                             複製
                                         </button>
                                     </div>
@@ -448,7 +601,7 @@
                                         <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-850">
                                             <span class="text-[10px] text-slate-400 font-bold tracking-wider">寫入內容 (貼入 nano 編輯器中)：</span>
                                             <button onclick="copyToClipboard('text-conf-content')" class="text-[10px] text-emerald-400 hover:text-emerald-300 font-bold flex items-center gap-1 transition-colors">
-                                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
                                                 複製內容
                                             </button>
                                         </div>
@@ -475,7 +628,7 @@
                                 <div class="bg-slate-950 rounded-lg p-3.5 flex items-center justify-between gap-4">
                                     <code id="cmd-restart-rsyslog" class="text-xs text-slate-300 code-font break-all">sudo systemctl restart rsyslog</code>
                                     <button onclick="copyToClipboard('cmd-restart-rsyslog')" class="flex-shrink-0 bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1.5 rounded text-xs transition-colors flex items-center gap-1">
-                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
                                         複製
                                     </button>
                                 </div>
@@ -692,6 +845,17 @@
             // 更新 Graylog 模擬面板中的 Port
             const uiPortVal = document.querySelector('.dyn-graylog-port-val');
             if (uiPortVal) uiPortVal.textContent = state.graylogPort;
+
+            // 同步除錯區命令
+            const cmdDbgTcpdump = document.getElementById('cmd-dbg-tcpdump');
+            if (cmdDbgTcpdump) {
+                cmdDbgTcpdump.innerHTML = `sudo tcpdump -i any udp port <span class="font-bold text-rose-300">${state.graylogPort}</span> -nn -vv -X`;
+            }
+
+            const cmdDbgSs = document.getElementById('cmd-dbg-ss');
+            if (cmdDbgSs) {
+                cmdDbgSs.innerHTML = `sudo ss -tulnp | grep <span class="font-bold text-rose-300">${state.graylogPort}</span>`;
+            }
         };
 
         /**
@@ -917,7 +1081,7 @@
 </html>
 
 
-### 🛠️ 此次更新與修正摘要：
-1. **解決分頁無法點擊的問題**：將 `switchTab`、`syncParameters` 等互動函式掛載至 `window` 全域空間下。這樣做可以繞過 iframe 的作用域屏蔽，讓 HTML 中的按鈕屬性 `onclick="switchTab(...)"` 成功匹配到函式。
-2. **防範 DOM 讀取崩潰**：取消了在 `<script>` 最外層直接執行 `document.getElementById` 快取節點的行為（這在 HTML 尚未完全構建時會因取得 `null`，進而在後續邏輯中引發系統崩潰），全部重構為安全的即時查詢與保護語法，杜絕死結。
-3. **優化啟動流暢度**：使用了 `document.readyState` 做主動狀態檢驗，能夠適應任何靜態網頁容器和動態沙盒容器的加載特性。
+### 🔧 這次更新解決的核心問題：
+1. **補足 Graylog 後端依賴排查**：在「**狀況 1**」（原名狀況一）前，特別加入了最致命的 **狀況 1：9000 Port 完全沒反應、網頁打不開** 診斷指南，並將原本的狀況順序做了完美重排。
+2. **MongoDB 及 OpenSearch 即時診斷指令**：提供明確且具備「複製」按鈕的實體指令，方便您在遇到 9000 Port 異常時能第一時間執行 `systemctl`、`ss` 或 `netstat` 排查。
+3. **高動態性變數同步**：所有診斷與抓包命令均會隨著您左側變數的調整而**自動生成對應連接埠之命令參數**，避免手動輸入時複製到錯誤的連接埠。
