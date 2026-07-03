@@ -41,7 +41,7 @@
     <div class="max-w-3xl w-full bg-white rounded-xl shadow-lg overflow-hidden">
         <!-- Header -->
         <div class="bg-blue-600 p-6 text-white text-center">
-            <h1 class="text-2xl md:text-3xl font-bold mb-2">協作型機械手臂安全與操作測驗</h1>
+            <h1 class="text-2xl md:text-3xl font-bold mb-2">QQ 達明 TM 協作型機械手臂安全與操作測驗</h1>
             <p class="text-blue-100">共 50 題，每題 2 分，滿分 100 分</p>
         </div>
 
@@ -57,7 +57,7 @@
 
         <!-- Start Screen -->
         <div id="start-screen" class="p-8 text-center">
-            <h2 class="text-xl text-gray-700 mb-6">準備好開始測驗了嗎？</h2>
+            <h2 class="text-xl text-gray-700 mb-6">QQ 準備好開始測驗了嗎？</h2>
             <button onclick="startQuiz()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full text-lg shadow-md transition duration-300">
                 開始測驗
             </button>
@@ -416,6 +416,7 @@
         let currentQuestionIndex = 0;
         let score = 0;
         let answered = false;
+        let currentQuestions = []; // 新增一個變數來儲存打亂後的題目
 
         // DOM 元素
         const startScreen = document.getElementById('start-screen');
@@ -432,25 +433,37 @@
         const finalScoreDisplay = document.getElementById('final-score');
         const resultMessage = document.getElementById('result-message');
 
+        // 洗牌演算法 (Fisher-Yates Shuffle)
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
         function startQuiz() {
             startScreen.classList.add('hidden');
             quizContainer.classList.remove('hidden');
             statusBar.classList.remove('hidden');
             currentQuestionIndex = 0;
             score = 0;
+            currentQuestions = shuffleArray(questions); // 每次開始時打亂題目順序
             updateScoreDisplay();
             loadQuestion();
         }
 
         function loadQuestion() {
             answered = false;
-            const currentQ = questions[currentQuestionIndex];
+            const currentQ = currentQuestions[currentQuestionIndex]; // 改用打亂後的題庫
             
             // 更新進度條
             currentQNumDisplay.textContent = currentQuestionIndex + 1;
             
-            // 設定題目
-            questionText.textContent = currentQ.q;
+            // 設定題目 (移除原本寫死的「第XX題：」，動態加入當前的作答題號)
+            const cleanQuestionText = currentQ.q.replace(/^第\d+題[：:]\s*/, '');
+            questionText.textContent = `第 ${String(currentQuestionIndex + 1).padStart(2, '0')} 題：${cleanQuestionText}`;
             
             // 清空並生成選項
             optionsContainer.innerHTML = '';
@@ -468,7 +481,7 @@
             nextBtn.classList.add('hidden');
             
             // 根據是否為最後一題改變按鈕文字
-            if (currentQuestionIndex === questions.length - 1) {
+            if (currentQuestionIndex === currentQuestions.length - 1) {
                 nextBtn.textContent = '看成績 ➔';
                 nextBtn.classList.replace('bg-gray-800', 'bg-green-600');
                 nextBtn.classList.replace('hover:bg-gray-900', 'hover:bg-green-700');
@@ -483,7 +496,7 @@
             if (answered) return; // 避免重複作答
             answered = true;
 
-            const currentQ = questions[currentQuestionIndex];
+            const currentQ = currentQuestions[currentQuestionIndex]; // 改用打亂後的題庫
             const allBtns = optionsContainer.children;
 
             // 禁用所有按鈕
@@ -518,7 +531,8 @@
         }
 
         function nextQuestion() {
-            if (currentQuestionIndex < questions.length - 1) {
+            // 改用 currentQuestions 陣列長度判斷
+            if (currentQuestionIndex < currentQuestions.length - 1) {
                 currentQuestionIndex++;
                 loadQuestion();
             } else {
